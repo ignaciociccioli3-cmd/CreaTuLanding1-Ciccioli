@@ -1,0 +1,58 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 2.5rem;
+  background: linear-gradient(135deg, #0b1026 0%, #1b2a6a 45%, #2b3a8c 100%);
+  color: #f8fafc;
+  box-shadow: 0 12px 24px rgba(11, 16, 38, 0.25);
+}
+
+.navbar__title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.navbar__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.navbar__links a {
+  color: inherit;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar__links a:hover,
+.navbar__links a:focus-visible {
+  color: #c7d2fe;
+  border-color: currentColor;
+}
+
+.cart-widget {
+  display: grid;
+  place-items: center;
+}
+
+.cart-widget__icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
