@@ -1,15 +1,31 @@
+import { Link, NavLink } from 'react-router-dom'
 import './nav.css'
 import CartWidget from './CartWidget'
+import { categories } from './data/categories'
+
+function getLinkClass({ isActive }) {
+  return `navbar__link${isActive ? ' is-active' : ''}`
+}
 
 function NavBar() {
   return (
     <header className="navbar">
-      <div className="navbar__title">Nexa Studio</div>
+      <Link to="/" className="navbar__title">
+        Nexa Studio
+      </Link>
       <nav className="navbar__links" aria-label="Navegación principal">
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
+        <NavLink to="/" end className={getLinkClass}>
+          Todas
+        </NavLink>
+        {categories.map((category) => (
+          <NavLink
+            key={category.id}
+            to={`/products/${category.id}`}
+            className={getLinkClass}
+          >
+            {category.label}
+          </NavLink>
+        ))}
       </nav>
       <CartWidget />
     </header>
