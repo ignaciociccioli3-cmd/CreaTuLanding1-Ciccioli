@@ -7,11 +7,11 @@ function getLinkClass({ isActive }) {
   return `navbar__link${isActive ? ' is-active' : ''}`
 }
 
-function NavBar() {
+function NavBar({ cartCount = 0 }) {
   return (
     <header className="navbar">
       <Link to="/" className="navbar__title">
-        Nexa Studio
+        Nexa Wear
       </Link>
       <nav className="navbar__links" aria-label="Navegación principal">
         <NavLink to="/" end className={getLinkClass}>
@@ -27,7 +27,7 @@ function NavBar() {
           </NavLink>
         ))}
       </nav>
-      <CartWidget />
+      <CartWidget count={cartCount} />
     </header>
   )
 }

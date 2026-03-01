@@ -1,15 +1,16 @@
+import { Link } from 'react-router-dom'
 import cartImage from '../Foto Carrito.jpeg'
 
-function CartWidget() {
+function CartWidget({ count = 0 }) {
   return (
-    <div className="cart-widget" aria-label="Carrito de compras">
+    <Link className="cart-widget" aria-label="Ir al carrito" to="/cart">
       <img
         className="cart-widget__icon"
         src={cartImage}
         alt="Carrito de compras"
       />
-      <span className="cart-widget__count">0</span>
-    </div>
+      <span className="cart-widget__count">{count}</span>
+    </Link>
   )
 }
 

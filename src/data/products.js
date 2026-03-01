@@ -1,74 +1,91 @@
+import baggyNegroImg from '../../img/BaggyNegro.webp'
+import camperaJeanImg from '../../img/CamperaJean.webp'
+import camperaPufferImg from '../../img/Campera.webp'
+import cargoAzulImg from '../../img/CargoAzul.webp'
+import cargoImg from '../../img/Cargo.jpg'
+import gorraClasicaImg from '../../img/GorraClasica.jpg'
+import remeraBasicaImg from '../../img/RemeraBasica.jpg'
+import remeraEstampadaImg from '../../img/RemeraEstampada.jpg'
+
 export const products = [
   {
     id: 1,
-    title: 'Brand Sprint Kit',
+    title: 'Remeras Estampadas',
     description:
-      'Workshop express para definir tono, propuesta de valor y lineamientos de marca.',
-    price: 1200,
-    category: 'branding',
-    stock: 8,
+      'Remeras para salir y vestir a la moda, con estampados originales y colores vibrantes.',
+    price: 25000,
+    category: 'remeras',
+    stock: 15,
+    image: remeraEstampadaImg,
   },
   {
     id: 2,
-    title: 'Web Launch Pack',
+    title: 'Remeras Basicas',
     description:
-      'Landing page orientada a conversion con copy, estructura y analitica inicial.',
-    price: 1850,
-    category: 'web',
-    stock: 6,
+      'Modelo clasico de manga corta, tela suave y calce regular.',
+    price: 20000,
+    category: 'remeras',
+    stock: 20,
+    image: remeraBasicaImg,
   },
   {
     id: 3,
-    title: 'Content Studio',
+    title: 'Jean baggy azul',
     description:
-      'Produccion mensual de piezas visuales para mantener activa la comunicacion digital.',
-    price: 950,
-    category: 'social-media',
-    stock: 14,
+      'Jean cómodo de corte baggy, lavado azul claro y detalles desgastados.',
+    price: 60000,
+    category: 'pantalones',
+    stock: 10,
+    image: cargoAzulImg,
   },
   {
     id: 4,
-    title: 'Growth Audit',
+    title: 'Cargo Relax Fit',
     description:
-      'Diagnostico integral de embudos, performance media y oportunidades de crecimiento.',
-    price: 740,
-    category: 'marketing',
-    stock: 10,
+      'Pantalon cargo de gabardina con bolsillos amplios y ajuste comodo.',
+    price: 55000,
+    category: 'pantalones',
+    stock: 8,
+    image: cargoImg,
+  },
+  {
+    id: 9,
+    title: 'Jean baggy negro',
+    description:
+      'Jean baggy negro de tiro medio con caida amplia y terminacion desgastada.',
+    price: 62000,
+    category: 'pantalones',
+    stock: 9,
+    image: baggyNegroImg,
   },
   {
     id: 5,
-    title: 'Visual Rebrand',
+    title: 'Campera Puffer',
     description:
-      'Actualizacion de identidad visual con sistema grafico y assets para ejecucion.',
-    price: 1650,
-    category: 'branding',
-    stock: 5,
+      'Campera inflable liviana con abrigo termico y capucha desmontable.',
+    price: 100000,
+    category: 'camperas',
+    stock: 7,
+    image: camperaPufferImg,
   },
   {
     id: 6,
-    title: 'Ecommerce UX Boost',
+    title: 'Campera Denim',
     description:
-      'Mejora de experiencia de compra para ecommerce con foco en navegacion y checkout.',
-    price: 2140,
-    category: 'web',
-    stock: 4,
-  },
-  {
-    id: 7,
-    title: 'Video Ads Pack',
-    description:
-      'Lotes de anuncios en video para campañas de performance y awareness.',
-    price: 1320,
-    category: 'audiovisual',
-    stock: 7,
+      'Campera de jean negra con lavado suave y botones metalicos.',
+    price: 89000,
+    category: 'camperas',
+    stock: 5,
+    image: camperaJeanImg,
   },
   {
     id: 8,
-    title: 'Social Pulse Tracking',
+    title: 'Gorra Clasica',
     description:
-      'Monitoreo semanal de comunidad, calendario editorial y metricas accionables.',
-    price: 680,
-    category: 'social-media',
-    stock: 11,
+      'Gorra tipica que todos queremos',
+    price: 15000,
+    category: 'accesorios',
+    stock: 20,
+    image: gorraClasicaImg,
   },
 ]

@@ -52,6 +52,7 @@
   display: grid;
   place-items: center;
   position: relative;
+  color: inherit;
 }
 
 .cart-widget__icon {

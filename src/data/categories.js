@@ -1,7 +1,6 @@
 export const categories = [
-  { id: 'branding', label: 'Branding' },
-  { id: 'web', label: 'Web' },
-  { id: 'social-media', label: 'Social Media' },
-  { id: 'marketing', label: 'Marketing' },
-  { id: 'audiovisual', label: 'Audiovisual' },
+  { id: 'remeras', label: 'Remeras' },
+  { id: 'pantalones', label: 'Pantalones' },
+  { id: 'camperas', label: 'Camperas' },
+  { id: 'accesorios', label: 'Accesorios' },
 ]

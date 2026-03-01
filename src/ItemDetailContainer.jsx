@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ItemDetail from './components/ItemDetail'
 import { getProductById } from './data/mockApi'
+import { useCart } from './context/useCart'
 
-function ItemDetailContainer() {
+function ItemDetailContainer({ onAddToCart }) {
   const { idItem } = useParams()
+  const { getAvailableStock } = useCart()
   const requestKey = idItem ?? ''
   const [requestState, setRequestState] = useState({
     key: null,
@@ -47,7 +49,15 @@ function ItemDetailContainer() {
   }, [idItem, requestKey])
 
   const loading = requestState.key !== requestKey
-  const item = loading ? null : requestState.item
+  const item = useMemo(() => {
+    if (loading || !requestState.item) return null
+
+    return {
+      ...requestState.item,
+      baseStock: requestState.item.stock,
+      stock: getAvailableStock(requestState.item),
+    }
+  }, [loading, requestState.item, getAvailableStock])
   const error = loading ? null : requestState.error
 
   if (loading) {
@@ -69,7 +79,7 @@ function ItemDetailContainer() {
 
   return (
     <section className="item-detail-container">
-      <ItemDetail item={item} />
+      <ItemDetail item={item} onAddToCart={onAddToCart} />
     </section>
   )
 }

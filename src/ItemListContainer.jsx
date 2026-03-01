@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemList from './components/ItemList'
 import { getProducts, getProductsByCategory } from './data/mockApi'
+import { useCart } from './context/useCart'
 
 function ItemListContainer({ greeting }) {
   const { idCategory } = useParams()
+  const { getAvailableStock } = useCart()
   const requestKey = idCategory ?? 'all'
   const [requestState, setRequestState] = useState({
     key: null,
@@ -43,7 +45,15 @@ function ItemListContainer({ greeting }) {
   }, [idCategory, requestKey])
 
   const loading = requestState.key !== requestKey
-  const items = loading ? [] : requestState.items
+  const items = useMemo(() => {
+    if (loading) return []
+
+    return requestState.items.map((product) => ({
+      ...product,
+      baseStock: product.stock,
+      stock: getAvailableStock(product),
+    }))
+  }, [loading, requestState.items, getAvailableStock])
   const error = loading ? null : requestState.error
 
   return (
