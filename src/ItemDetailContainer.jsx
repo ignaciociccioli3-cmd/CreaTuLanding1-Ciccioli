@@ -1,74 +1,74 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ItemDetail from './components/ItemDetail'
 import { getProductById } from './data/mockApi'
-import { useCart } from './context/useCart'
 
-function ItemDetailContainer({ onAddToCart }) {
-  const { idItem } = useParams()
-  const { getAvailableStock } = useCart()
-  const requestKey = idItem ?? ''
-  const [requestState, setRequestState] = useState({
-    key: null,
-    item: null,
-    error: null,
+function ItemDetailContainer({ onAddToCart, getAvailableStock }) {
+  const params = useParams()
+  const idProducto = params.idItem
+  const clave = idProducto ?? ''
+  const [estado, setEstado] = useState({
+    clave: '',
+    producto: null,
+    error: '',
   })
 
   useEffect(() => {
-    let activeRequest = true
+    let requestActiva = true
 
-    getProductById(idItem)
-      .then((response) => {
-        if (!activeRequest) return
-        if (!response) {
-          setRequestState({
-            key: requestKey,
-            item: null,
+    getProductById(idProducto)
+      .then((respuesta) => {
+        if (!requestActiva) return
+        if (!respuesta) {
+          setEstado({
+            clave,
+            producto: null,
             error: 'No encontramos el producto solicitado.',
           })
           return
         }
-        setRequestState({
-          key: requestKey,
-          item: response,
-          error: null,
+        setEstado({
+          clave,
+          producto: respuesta,
+          error: '',
         })
       })
       .catch(() => {
-        if (!activeRequest) return
-        setRequestState({
-          key: requestKey,
-          item: null,
+        if (!requestActiva) return
+        setEstado({
+          clave,
+          producto: null,
           error: 'No pudimos cargar el detalle del producto.',
         })
       })
 
     return () => {
-      activeRequest = false
+      requestActiva = false
     }
-  }, [idItem, requestKey])
+  }, [idProducto, clave])
 
-  const loading = requestState.key !== requestKey
-  const item = useMemo(() => {
-    if (loading || !requestState.item) return null
+  const loading = estado.clave !== clave
+  const producto = loading ? null : estado.producto
+  const errorVisible = loading ? '' : estado.error
 
-    return {
-      ...requestState.item,
-      baseStock: requestState.item.stock,
-      stock: getAvailableStock(requestState.item),
-    }
-  }, [loading, requestState.item, getAvailableStock])
-  const error = loading ? null : requestState.error
+  const productoConStock =
+    loading || !producto
+      ? null
+      : {
+          ...producto,
+          baseStock: producto.stock,
+          stock: getAvailableStock(producto),
+        }
 
   if (loading) {
     return <p className="item-detail-container__message">Cargando detalle...</p>
   }
 
-  if (error || !item) {
+  if (errorVisible || !productoConStock) {
     return (
       <section className="item-detail-container">
         <p className="item-detail-container__message">
-          {error || 'No encontramos el producto solicitado.'}
+          {errorVisible || 'No encontramos el producto solicitado.'}
         </p>
         <Link className="item-detail-container__back" to="/">
           Volver al catalogo
@@ -79,7 +79,7 @@ function ItemDetailContainer({ onAddToCart }) {
 
   return (
     <section className="item-detail-container">
-      <ItemDetail item={item} onAddToCart={onAddToCart} />
+      <ItemDetail item={productoConStock} onAddToCart={onAddToCart} />
     </section>
   )
 }

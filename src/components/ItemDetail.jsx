@@ -2,13 +2,9 @@ import ItemCount from './ItemCount'
 
 function ItemDetail({ item, onAddToCart }) {
   const handleAdd = (qty) => {
-    if (!onAddToCart) {
-      console.log('add', { id: item.id, qty })
-      return
+    if (onAddToCart) {
+      onAddToCart(item, qty)
     }
-
-    onAddToCart(item, qty)
-    console.log('add', { id: item.id, qty })
   }
 
   return (

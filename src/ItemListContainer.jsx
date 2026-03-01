@@ -1,60 +1,57 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemList from './components/ItemList'
 import { getProducts, getProductsByCategory } from './data/mockApi'
-import { useCart } from './context/useCart'
 
-function ItemListContainer({ greeting }) {
-  const { idCategory } = useParams()
-  const { getAvailableStock } = useCart()
-  const requestKey = idCategory ?? 'all'
-  const [requestState, setRequestState] = useState({
-    key: null,
-    items: [],
-    error: null,
+function ItemListContainer({ greeting, getAvailableStock }) {
+  const params = useParams()
+  const idCategoria = params.idCategory
+  const clave = idCategoria ?? 'all'
+  const [estado, setEstado] = useState({
+    clave: '',
+    productos: [],
+    error: '',
   })
 
   useEffect(() => {
-    let activeRequest = true
+    let requestActiva = true
 
-    const fetchProductsPromise = idCategory
-      ? getProductsByCategory(idCategory)
+    const promesa = idCategoria
+      ? getProductsByCategory(idCategoria)
       : getProducts()
 
-    fetchProductsPromise
-      .then((response) => {
-        if (!activeRequest) return
-        setRequestState({
-          key: requestKey,
-          items: response,
-          error: null,
+    promesa
+      .then((respuesta) => {
+        if (!requestActiva) return
+        setEstado({
+          clave,
+          productos: respuesta,
+          error: '',
         })
       })
       .catch(() => {
-        if (!activeRequest) return
-        setRequestState({
-          key: requestKey,
-          items: [],
+        if (!requestActiva) return
+        setEstado({
+          clave,
+          productos: [],
           error: 'No pudimos cargar los productos.',
         })
       })
 
     return () => {
-      activeRequest = false
+      requestActiva = false
     }
-  }, [idCategory, requestKey])
+  }, [idCategoria, clave])
 
-  const loading = requestState.key !== requestKey
-  const items = useMemo(() => {
-    if (loading) return []
+  const loading = estado.clave !== clave
+  const productos = loading ? [] : estado.productos
+  const error = loading ? '' : estado.error
 
-    return requestState.items.map((product) => ({
-      ...product,
-      baseStock: product.stock,
-      stock: getAvailableStock(product),
-    }))
-  }, [loading, requestState.items, getAvailableStock])
-  const error = loading ? null : requestState.error
+  const productosConStock = productos.map((producto) => ({
+    ...producto,
+    baseStock: producto.stock,
+    stock: getAvailableStock(producto),
+  }))
 
   return (
     <section className="item-list-container" aria-label="Listado de items">
@@ -64,13 +61,15 @@ function ItemListContainer({ greeting }) {
 
       {!loading && error && <p className="item-list-container__message">{error}</p>}
 
-      {!loading && !error && items.length === 0 && (
+      {!loading && !error && productosConStock.length === 0 && (
         <p className="item-list-container__message">
           No hay productos para esta categoria.
         </p>
       )}
 
-      {!loading && !error && items.length > 0 && <ItemList items={items} />}
+      {!loading && !error && productosConStock.length > 0 && (
+        <ItemList items={productosConStock} />
+      )}
     </section>
   )
 }

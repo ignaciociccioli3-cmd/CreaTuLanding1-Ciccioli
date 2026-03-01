@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useCart } from './context/useCart'
 
-function CartPage() {
-  const { cartItems, cartTotal, removeFromCart, clearCart } = useCart()
+function CartPage({ cartItems, cartTotal, onRemoveItem, onClearCart }) {
 
   if (cartItems.length === 0) {
     return (
@@ -32,7 +30,7 @@ function CartPage() {
             <button
               type="button"
               className="cart-page__remove"
-              onClick={() => removeFromCart(item.id)}
+              onClick={() => onRemoveItem(item.id)}
             >
               Eliminar
             </button>
@@ -45,7 +43,7 @@ function CartPage() {
       </p>
 
       <div className="cart-page__actions">
-        <button type="button" className="cart-page__clear" onClick={clearCart}>
+        <button type="button" className="cart-page__clear" onClick={onClearCart}>
           Vaciar carrito
         </button>
         <Link className="cart-page__cta" to="/">

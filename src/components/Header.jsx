@@ -1,18 +1,18 @@
-import { Link, NavLink } from 'react-router-dom'
-import './nav.css'
-import CartWidget from './CartWidget'
-import { categories } from './data/categories'
+import { NavLink } from 'react-router-dom'
+import CartWidget from '../CartWidget'
+import { categories } from '../data/categories'
+import '../nav.css'
 
 function getLinkClass({ isActive }) {
   return `navbar__link${isActive ? ' is-active' : ''}`
 }
 
-function NavBar({ cartCount = 0 }) {
+function Header({ cartCount = 0 }) {
   return (
     <header className="navbar">
-      <Link to="/" className="navbar__title">
+      <NavLink to="/" className="navbar__title">
         Nexa Wear
-      </Link>
+      </NavLink>
       <nav className="navbar__links" aria-label="Navegación principal">
         <NavLink to="/" end className={getLinkClass}>
           Todas
@@ -32,4 +32,4 @@ function NavBar({ cartCount = 0 }) {
   )
 }
 
-export default NavBar
+export default Header
