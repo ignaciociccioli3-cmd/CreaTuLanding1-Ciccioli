@@ -1,0 +1,146 @@
+.checkout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.checkout__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.checkout__form,
+.checkout__summary,
+.checkout__success {
+  padding: 1.5rem;
+}
+
+.checkout__form {
+  display: grid;
+  gap: 1rem;
+}
+
+.checkout__field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.checkout__field span {
+  font-weight: 700;
+}
+
+.checkout__field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(23, 53, 134, 0.16);
+  border-radius: 14px;
+  background: #fbfdff;
+  color: #0f172a;
+}
+
+.checkout__field input:focus {
+  outline: 2px solid rgba(47, 107, 255, 0.22);
+  border-color: var(--brand-500);
+}
+
+.checkout__field small,
+.checkout__error {
+  color: var(--danger);
+}
+
+.checkout__error {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: rgba(220, 38, 38, 0.1);
+  font-weight: 600;
+}
+
+.checkout__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 104px;
+}
+
+.checkout__summary-title {
+  margin: 0;
+}
+
+.checkout__summary-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.checkout__summary-item,
+.checkout__summary-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.checkout__summary-item {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(23, 53, 134, 0.12);
+}
+
+.checkout__summary-item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout__summary-item span {
+  color: var(--text-muted);
+}
+
+.checkout__summary-total {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.checkout__success {
+  text-align: center;
+}
+
+.checkout__success-text {
+  margin: 1rem auto 0.85rem;
+  max-width: 560px;
+  color: var(--text-muted);
+}
+
+.checkout__order-id {
+  display: inline-block;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: rgba(219, 231, 255, 0.45);
+  color: var(--brand-700);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.checkout__success-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .checkout__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout__summary {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout__success-actions {
+    flex-direction: column;
+  }
+}

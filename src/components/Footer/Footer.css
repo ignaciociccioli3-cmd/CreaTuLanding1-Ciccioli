@@ -1,0 +1,32 @@
+.footer {
+  padding: 1.5rem 2rem 2rem;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  border-top: 1px solid rgba(23, 53, 134, 0.12);
+  color: #4c5d7a;
+}
+
+.footer__brand,
+.footer__text {
+  margin: 0;
+}
+
+.footer__brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1rem 1rem 1.5rem;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+  }
+}

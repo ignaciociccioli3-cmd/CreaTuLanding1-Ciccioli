@@ -4,3 +4,7 @@ export const categories = [
   { id: 'camperas', label: 'Camperas' },
   { id: 'accesorios', label: 'Accesorios' },
 ]
+
+export function getCategoryLabel(categoryId) {
+  return categories.find((category) => category.id === categoryId)?.label ?? 'Catalogo'
+}
